@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TrezorConnect | Trezor</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Trezor info@trezor.io" />
+    <meta name="robots" content="index, follow" />
+    <meta name="title" content="Trezor Connect" />
+    <script type="text/javascript" src="./js/trezor-connect.63a01bc7a7ca2e156d70.js"></script>
+    <script type="text/javascript">
+        var TrezorConnect = window.TrezorConnect;
+        console.log('init my test use');
+
+        async function init() {
+            try {
+                await TrezorConnect.initProkey({
+                    configSrc: './data/config.json',
+                    debug: true,
+                    origin: 'localhost',
+                    priority: 0,
+                    trustedHost: true,
+                    connectSrc: '',
+                    iframeSrc: 'iframe.html',
+                    popup: false,
+                    popupSrc: 'popup.html',
+                    webusbSrc: 'webusb.html',
+                    transportReconnect: false,
+                    webusb: false,
+                    pendingTransportEvent: true,
+                    supportedBrowser: true,
+                    extension: null,
+                });
+                console.log('prokey init done.');
+            } catch (error) {
+                console.log('error darim : ', error);
+            }
+        }
+
+        async function call() {
+            try {
+                await TrezorConnect.callProkey({ method: 'getPublicKey', coin: 'btc', path: "m/49'/0'/0'/0/0" }).then
+                    (result => {
+                        console.log('call use result : ', result);
+                    });
+                console.log('prokey call finished.');
+            } catch (error) {
+                console.log('error in use prokey call : ', error);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Prokey Connect</h1>
+    <button type="button" onclick="init();">Init Prokey</button>
+    <button type="button" onclick="call();">Call Prokey</button>
+</body>
+
+</html>
