@@ -5,22 +5,32 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>TrezorConnect | Trezor</title>
+    <title>ProkeyConnect | Prokey</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <meta name="author" content="Trezor info@trezor.io" />
+    <meta name="author" content="Prokey info@prokey.io" />
     <meta name="robots" content="index, follow" />
-    <meta name="title" content="Trezor Connect" />
+    <meta name="title" content="Prokey Connect" />
     <script type="text/javascript" src="./js/trezor-connect.63a01bc7a7ca2e156d70.js"></script>
     <script type="text/javascript">
         var TrezorConnect = window.TrezorConnect;
         console.log('init my test use');
 
+        TrezorConnect.on('DEVICE_EVENT', (event) => {
+            if (event.type === 'device-connect') {
+                console.log('Prokey Connected Event');
+            } else if (event.type === 'device-disconnect') {
+                console.log('Prokey Disconnected Event');
+            } else if (event.type == 'device-changed') {
+                console.log('Prokey Device Change Event');
+            }
+        });
+
         async function init() {
             try {
                 await TrezorConnect.initProkey({
                     configSrc: './data/config.json',
-                    debug: true,
+                    debug: false,
                     origin: 'localhost',
                     priority: 0,
                     trustedHost: true,
@@ -41,7 +51,7 @@
             }
         }
 
-        async function call() {
+        async function getPublicKey() {
             try {
                 await TrezorConnect.callProkey({ method: 'getPublicKey', coin: 'btc', path: "m/49'/0'/0'/0/0" }).then
                     (result => {
@@ -52,13 +62,28 @@
                 console.log('error in use prokey call : ', error);
             }
         }
+
+        async function getAddress() {
+            try {
+                await TrezorConnect.callProkey({ method: 'getAddress', coin: 'btc', path: "m/49'/0'/0'/0/0" }).then(result => {
+                    console.log('get Address result : ', result);
+                });
+            } catch (error) {
+                console.log('error in use prokey get address : ', error);
+            }
+        }
     </script>
 </head>
 
 <body>
     <h1>Prokey Connect</h1>
+    <div class="device-status"></div>
+    <div class="label"></div>
     <button type="button" onclick="init();">Init Prokey</button>
-    <button type="button" onclick="call();">Call Prokey</button>
+    <button type="button" onclick="getPublicKey();">Call Prokey - getPublicKey</button>
+    <button type="button" onclick="getAddress();">Call Prokey - getAddress</button>
+    <div class="public-key"></div>
+    <div class="address"></div>
 </body>
 
 </html>
