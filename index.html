@@ -11,69 +11,8 @@
     <meta name="author" content="Prokey info@prokey.io" />
     <meta name="robots" content="index, follow" />
     <meta name="title" content="Prokey Connect" />
-    <script type="text/javascript" src="./js/prokey-connect.66734e78c0796bc3ef9b.js"></script>
-    <!-- <script type="text/javascript">
-        var ProkeyConnect = window.ProkeyConnect;
-        console.log('init my test use');
-
-        ProkeyConnect.on('DEVICE_EVENT', (event) => {
-            console.log('my device event is : ', event);
-            // if (event.type === 'device-connect') {
-            //     console.log('Prokey Connected Event : ', event);
-            // } else if (event.type === 'device-disconnect') {
-            //     console.log('Prokey Disconnected Event : ', event);
-            // } else if (event.type == 'device-changed') {
-            //     console.log('Prokey Device Change Event : ', event);
-            // }
-        });
-
-        ProkeyConnect.on('UI_EVENT', (event) => {
-            console.log('my ui event is : ', event);
-        });
-
-            ProkeyConnect.on('TRANSPORT_EVENT', (event) => {
-            console.log('my transport event is : ', event);
-        });
-
-        async function prokey_init() {
-            try {
-                await ProkeyConnect.init({
-                    configSrc: './data/config.json',
-                    debug: false,
-                    origin: 'localhost',
-                    priority: 0,
-                    trustedHost: true,
-                    connectSrc: '',
-                    iframeSrc: 'iframe.html',
-                    popup: false,
-                    popupSrc: 'popup.html',
-                    webusbSrc: 'webusb.html',
-                    transportReconnect: false,
-                    webusb: false,
-                    pendingTransportEvent: true,
-                    supportedBrowser: true,
-                    extension: null,
-                });
-                console.log('prokey conect init done.');
-            } catch (error) {
-                console.log('error darim : ', error);
-            }
-        }
-
-        async function prokey_getPublicKey() {
-            ProkeyConnect.getPublicKey({ coin: 'btn', path: "m/49'/0'/0'/0/0" }).then(
-                result => {
-                    console.log('Prokey result (pk) : ', result);
-                }
-            );
-        }
-    </script> -->
 </head>
-
 <body>
     <h1>Prokey Connect</h1>
-    <!-- <button type="button" onclick="prokey_init();">Init Prokey Connect</button>
-    <button type="button" onclick="prokey_getPublicKey();">Get Public Key</button> -->
 </body>
-
 </html>
